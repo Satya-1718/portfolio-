@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GL Bajaj Online Bookstore (upgraded)</title>
+<style>
+  html, body { height: 100%; margin: 0; }
+  .layout { display: grid; height: 100%; grid-template-columns: 200px 1fr; grid-template-rows: 90px 1fr; }
+  iframe { border: 0; width: 100%; height: 100%; }
+  #top { grid-column: 1 / 3; border-bottom: 3px solid #7a1f1f; }
+  #left { border-right: 1px solid #c9b27c; }
+  @media (max-width: 700px) {
+    .layout { grid-template-columns: 1fr; grid-template-rows: 130px 52px 1fr; }
+    #top { grid-column: 1; }
+    #left { border-right: 0; border-bottom: 1px solid #c9b27c; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+  <iframe id="top" name="top" src="top.html" title="Top frame"></iframe>
+  <iframe id="left" name="left" src="left.html" title="Categories"></iframe>
+  <iframe id="content" name="content" src="home.html" title="Content frame"></iframe>
+</div>
+</body>
+</html>

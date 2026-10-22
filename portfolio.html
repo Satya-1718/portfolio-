@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Satyanarayan Tripathi | Portfolio</title>
+<link rel="stylesheet" href="portfolio.css">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#7a1f1f">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<script>
+// Apply saved theme before the page paints (no flash)
+try { var t = localStorage.getItem('theme');
+  if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark');
+} catch (e) {}
+document.documentElement.classList.add('js');
+// Accent palette: [light-mode colour, dark-mode colour]
+window.ACCENTS = { maroon:['#7a1f1f','#e58a8a'], gold:['#8a6d1a','#e0b84a'], green:['#2e6b4f','#6fcf97'], blue:['#1f4e8c','#7fb2ff'], purple:['#5b2a86','#c39bf0'] };
+window.applyAccent = function () {
+  try {
+    var n = localStorage.getItem('accent'), d = document.documentElement;
+    if (n && Object.prototype.hasOwnProperty.call(window.ACCENTS, n)) d.style.setProperty('--accent', window.ACCENTS[n][d.classList.contains('dark') ? 1 : 0]);
+    else d.style.removeProperty('--accent');
+  } catch (e) {}
+};
+window.applyAccent();
+</script>
+</head>
+<body>
+<div id="progress" aria-hidden="true"></div>
+<header>
+  <img src="logo.jpg" alt="GL Bajaj logo" class="logo">
+  <div class="brand">Satyanarayan Tripathi</div>
+  <div class="hdr-tools"><div class="accent-picker" role="group" aria-label="Accent colour"><span>Accent</span><button type="button" class="dot" data-accent="maroon" aria-pressed="false" aria-label="Maroon accent" title="Maroon" style="--dot:#7a1f1f"></button><button type="button" class="dot" data-accent="gold" aria-pressed="false" aria-label="Gold accent" title="Gold" style="--dot:#c9a227"></button><button type="button" class="dot" data-accent="green" aria-pressed="false" aria-label="Green accent" title="Green" style="--dot:#2e6b4f"></button><button type="button" class="dot" data-accent="blue" aria-pressed="false" aria-label="Blue accent" title="Blue" style="--dot:#1f4e8c"></button><button type="button" class="dot" data-accent="purple" aria-pressed="false" aria-label="Purple accent" title="Purple" style="--dot:#5b2a86"></button></div><button id="palBtn" type="button" aria-label="Quick search (Ctrl+K)" title="Quick search (Ctrl+K)">Search</button><button id="langBtn" type="button" aria-label="Switch language">हिंदी</button><button id="themeBtn" type="button">Dark mode</button></div>
+</header>
+<section class="hero" id="top">
+  <div class="hero-bg" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="hero-inner">
+    <img class="hero-photo" src="photo.jpg" alt="Satyanarayan Tripathi" onerror="this.style.display='none'">
+    <div class="hero-text">
+      <p id="greeting"></p>
+      <h1>Satyanarayan Tripathi</h1>
+      <p class="typed-line"><span data-i18n="iam">I am a</span> <span id="typed"></span><span id="typedEnd" data-i18n="typedEnd"></span><span class="cursor">|</span></p>
+      <p class="hero-sub" data-i18n="heroSub">B.Tech student at GL Bajaj Institute of Technology and Management, building web projects.</p>
+      <div class="hero-cta"><a class="btn" href="#projects" data-i18n="viewProjects">View projects</a><a class="btn ghost" href="resume.pdf" download data-i18n="dlResume">Download resume</a><button type="button" class="btn ghost" id="installBtn" hidden>Install app</button></div>
+    </div>
+  </div>
+  <ul class="stats">
+    <li><b data-count="4" data-from=".cert">4</b><span data-i18n="stCerts">Certificates</span></li>
+    <li><b data-count="10">10</b><span data-i18n="stLabs">Lab experiments</span></li>
+    <li><b data-count="2" data-from=".tilt">2</b><span data-i18n="stProjects">Projects</span></li>
+    <li><b data-count="10">10</b><span data-i18n="stBooks">Books in my store</span></li>
+  </ul>
+</section>
+<nav><a href="#terminal" data-i18n="nTerminal">Terminal</a><a href="#about" data-i18n="nAbout">About</a><a href="#education" data-i18n="nEducation">Education</a><a href="#skills" data-i18n="nSkills">Skills</a><a href="#certificates" data-i18n="nCerts">Certificates</a><a href="#projects" data-i18n="nProjects">Projects</a><a href="#game" data-i18n="nGame">Game</a><a href="#contact" data-i18n="nContact">Contact</a><a href="resume.pdf" target="_blank" rel="noopener" data-i18n="nResume">Resume</a><a href="https://github.com/Satya-1718" target="_blank" rel="noopener">GitHub</a></nav>
+<main>
+  <section id="terminal" class="reveal"><h2 data-i18n="hTerminal">Meet me in the terminal</h2>
+    <div class="term" id="term">
+      <div class="term-bar"><span></span><span></span><span></span><b>satya@portfolio:~</b></div>
+      <div class="term-out" id="termOut" role="log" aria-live="polite"></div>
+      <div class="term-in"><label for="termInput" class="sr">Terminal command</label><span class="prompt">$</span><input id="termInput" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="type a command, e.g. help"></div>
+    </div>
+    <div class="term-chips"><button type="button" data-cmd="help">help</button><button type="button" data-cmd="about">about</button><button type="button" data-cmd="skills">skills</button><button type="button" data-cmd="projects">projects</button></div>
+  </section>
+  <section id="about" class="about reveal">
+    <div class="about-text"><h2 data-i18n="hAbout">About me</h2>
+    <p><span data-i18n="aboutText">B.Tech student at GL Bajaj Institute of Technology and Management (Roll No. 2501920110334), learning web development and building small projects. My code is on GitHub: </span><a href="https://github.com/Satya-1718" target="_blank" rel="noopener">github.com/Satya-1718</a>.</p></div>
+    <div class="photo-wrap">
+      <img src="photo.jpg" alt="Satyanarayan Tripathi" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <span class="initials" style="display:none">ST</span>
+    </div>
+  </section>
+  <section id="education" class="reveal"><h2 data-i18n="hEducation">Education &amp; Journey</h2>
+    <div class="timeline">
+      <div class="t-item"><span class="t-date">2025 &ndash; Present</span><h3>B.Tech, GL Bajaj Institute of Technology and Management</h3><p>Studying computer science subjects and building web projects.</p></div>
+      <div class="t-item"><span class="t-date">2026</span><h3>Web Development Lab (BCS353)</h3><p>Completed 10 experiments covering HTML, CSS and JavaScript.</p></div>
+      <div class="t-item"><span class="t-date">2026</span><h3>Online Bookstore</h3><p>Built a multi-page store with a cart and validated forms.</p></div>
+    </div></section>
+  <section id="skills" class="reveal"><h2 data-i18n="hSkills">Skills</h2>
+    <p class="hint" data-i18n="hintShelf">Pick a book from the shelf to see where I used it.</p>
+    <ul class="shelf"><li><button type="button" class="book" aria-pressed="false" style="--c:#7a1f1f;--h:170px" data-title="HTML" data-proof="Used in the Online Bookstore and this portfolio: semantic sections, forms, tables and iframes.">HTML</button></li><li><button type="button" class="book" aria-pressed="false" style="--c:#2e6b4f;--h:150px" data-title="CSS" data-proof="Grid layouts, dark mode with CSS variables, scroll reveal and tilt-card animations.">CSS</button></li><li><button type="button" class="book" aria-pressed="false" style="--c:#1f3a5f;--h:190px" data-title="JavaScript" data-proof="Form validation with regular expressions, a localStorage cart, and the terminal on this page.">JavaScript</button></li><li><button type="button" class="book" aria-pressed="false" style="--c:#5b3a1e;--h:160px" data-title="Git and GitHub" data-proof="My code lives on GitHub: github.com/Satya-1718. The feed below reads it live.">Git &amp; GitHub</button></li><li><button type="button" class="book" aria-pressed="false" style="--c:#8a6d1a;--h:175px" data-title="Full-Stack Basics" data-proof="Certificate: Introduction to Full-Stack Web Development (Vodafone Idea Foundation x Edunet Foundation, Aug 2026).">Full-Stack</button></li><li><button type="button" class="book" aria-pressed="false" style="--c:#4a2c5a;--h:185px" data-title="Cybersecurity Fundamentals" data-proof="Certificate: Introduction to Cybersecurity (Cisco Networking Academy, Jun 2026).">Cybersecurity</button></li><li><button type="button" class="book" aria-pressed="false" style="--c:#1f5a5a;--h:155px" data-title="AI Fundamentals" data-proof="Certificates: Introduction to Modern AI and Apply AI: Update Your Resume (Cisco Networking Academy, Jun 2026).">AI Basics</button></li></ul>
+    <div class="book-detail" id="bookDetail" aria-live="polite">Tap a book to open it.</div>
+    <h3 class="bars-title"><span data-i18n="barsTitle">Comfort level</span> <small data-i18n="barsNote">(my own rating)</small></h3>
+    <ul class="bars">
+      <li><span class="bar-label">HTML</span><span class="bar" role="img" aria-label="HTML: 85 percent"><span style="--w:85%"></span></span><em>85%</em></li>
+      <li><span class="bar-label">CSS</span><span class="bar" role="img" aria-label="CSS: 75 percent"><span style="--w:75%"></span></span><em>75%</em></li>
+      <li><span class="bar-label">JavaScript</span><span class="bar" role="img" aria-label="JavaScript: 65 percent"><span style="--w:65%"></span></span><em>65%</em></li>
+      <li><span class="bar-label">Git &amp; GitHub</span><span class="bar" role="img" aria-label="Git and GitHub: 60 percent"><span style="--w:60%"></span></span><em>60%</em></li>
+      <li><span class="bar-label">Full-Stack</span><span class="bar" role="img" aria-label="Full-Stack basics: 55 percent"><span style="--w:55%"></span></span><em>55%</em></li>
+    </ul></section>
+  <section id="certificates" class="reveal"><h2 data-i18n="hCerts">Certificates</h2>
+    <p class="hint" data-i18n="hintCerts">Tap a card to flip it and see the details.</p>
+    <div class="cert-grid">
+      <div class="cert flipcard">
+        <div class="flip-inner">
+          <div class="face front"><img src="certificate_fullstack.jpg" alt="Certificate of Completion: Introduction to Full-Stack Web Development" loading="lazy"><span class="tap" aria-hidden="true">Tap to flip</span></div>
+          <div class="face back" inert aria-hidden="true">
+            <h3>Introduction to Full-Stack Web Development</h3>
+            <p>Vodafone Idea Foundation &times; Edunet Foundation (VOIS)</p>
+            <p><b>Issued August 19, 2026</b></p>
+            <p class="cid">Certificate ID: VFLMS26_168485</p>
+            <p class="links"><a href="certificate_fullstack.pdf" target="_blank" rel="noopener">View PDF</a><a href="certificate_fullstack.jpg" target="_blank" rel="noopener">Full image</a></p>
+          </div>
+        </div>
+        <button type="button" class="flip-toggle" aria-pressed="false" aria-label="Flip card: Introduction to Full-Stack Web Development">Show details</button>
+      </div>
+      <div class="cert flipcard">
+        <div class="flip-inner">
+          <div class="face front"><img src="certificate_cybersecurity.jpg" alt="Certificate: Introduction to Cybersecurity, Cisco Networking Academy" loading="lazy"><span class="tap" aria-hidden="true">Tap to flip</span></div>
+          <div class="face back" inert aria-hidden="true">
+            <h3>Introduction to Cybersecurity</h3>
+            <p>Cisco Networking Academy, via GL Bajaj Institute of Technology and Management</p>
+            <p><b>Completed 30 Jun 2026</b></p>
+            <p class="cid">Cert ID: 204e9660-3b8e-4d5b-bce1-d3f4792b3c26</p>
+            <p class="links"><a href="certificate_cybersecurity.pdf" target="_blank" rel="noopener">View PDF</a><a href="certificate_cybersecurity.jpg" target="_blank" rel="noopener">Full image</a></p>
+          </div>
+        </div>
+        <button type="button" class="flip-toggle" aria-pressed="false" aria-label="Flip card: Introduction to Cybersecurity">Show details</button>
+      </div>
+      <div class="cert flipcard">
+        <div class="flip-inner">
+          <div class="face front"><img src="certificate_modern_ai.jpg" alt="Certificate: Introduction to Modern AI, Cisco Networking Academy" loading="lazy"><span class="tap" aria-hidden="true">Tap to flip</span></div>
+          <div class="face back" inert aria-hidden="true">
+            <h3>Introduction to Modern AI</h3>
+            <p>Cisco Networking Academy, via GL Bajaj Institute of Technology and Management</p>
+            <p><b>Completed 28 Jun 2026</b></p>
+            <p class="cid">Cert ID: 4730432f-2a24-49d2-a5f4-7b1be0c2fd2b</p>
+            <p class="links"><a href="certificate_modern_ai.pdf" target="_blank" rel="noopener">View PDF</a><a href="certificate_modern_ai.jpg" target="_blank" rel="noopener">Full image</a></p>
+          </div>
+        </div>
+        <button type="button" class="flip-toggle" aria-pressed="false" aria-label="Flip card: Introduction to Modern AI">Show details</button>
+      </div>
+      <div class="cert flipcard">
+        <div class="flip-inner">
+          <div class="face front"><img src="certificate_apply_ai.jpg" alt="Certificate: Apply AI: Update Your Resume, Cisco Networking Academy" loading="lazy"><span class="tap" aria-hidden="true">Tap to flip</span></div>
+          <div class="face back" inert aria-hidden="true">
+            <h3>Apply AI: Update Your Resume</h3>
+            <p>Cisco Networking Academy, via GL Bajaj Institute of Technology and Management</p>
+            <p><b>Completed 27 Jun 2026</b></p>
+            <p class="cid">Cert ID: a36bd863-dbcd-4a17-b490-8ae8a368ef81</p>
+            <p class="links"><a href="certificate_apply_ai.pdf" target="_blank" rel="noopener">View PDF</a><a href="certificate_apply_ai.jpg" target="_blank" rel="noopener">Full image</a></p>
+          </div>
+        </div>
+        <button type="button" class="flip-toggle" aria-pressed="false" aria-label="Flip card: Apply AI: Update Your Resume">Show details</button>
+      </div>
+    </div></section>
+  <section id="projects" class="reveal"><h2 data-i18n="hProjects">Projects</h2>
+    <div class="grid">
+      <article class="tilt"><h3>Online Bookstore</h3><p>Multi-page site with login, registration, catalogue and cart.</p>
+        <details><summary>Case study</summary>
+          <p><b>Problem:</b> The lab needed separate pages that work together as one working store.</p>
+          <p><b>What I built:</b> A three-frame home page, login and registration forms, a catalogue table, and a cart that remembers chosen books.</p>
+          <p><b>What I learned:</b> Sharing data between pages with localStorage, and building layouts with iframes and CSS Grid.</p></details>
+        <p><a class="open" href="bookstore/store/index.html">Open store &rarr;</a></p></article>
+      <article class="tilt"><h3>Form Validation</h3><p>JavaScript checks for name, password, e-mail and phone fields.</p>
+        <details><summary>Case study</summary>
+          <p><b>Problem:</b> Forms accept wrong input unless something checks it before submission.</p>
+          <p><b>What I built:</b> Checks for name, password, e-mail and phone number that show a clear message under each field.</p>
+          <p><b>What I learned:</b> Writing regular expressions, using the onblur event, and stopping a form from submitting.</p></details>
+        <p><a class="open" href="bookstore/registration.html">Try the form &rarr;</a></p></article>
+    </div></section>
+  <section id="github-feed" class="reveal"><h2 data-i18n="hGithub">Live from GitHub</h2>
+    <p id="ghStatus" role="status">Loading my latest repositories&hellip;</p>
+    <div class="grid" id="ghGrid"></div>
+    <p><a class="open" href="https://github.com/Satya-1718?tab=repositories" target="_blank" rel="noopener">See all repositories &rarr;</a></p></section>
+  <section id="game" class="reveal"><h2 data-i18n="hGame">Typing speed test</h2>
+    <p class="hint" data-i18n="hintGame">Type the text below. The timer starts with your first letter.</p>
+    <div class="game-stats"><span>Time: <b id="gTime">30</b>s</span><span>WPM: <b id="gWpm">0</b></span><span>Accuracy: <b id="gAcc">100</b>%</span><span>Best: <b id="gBest">&ndash;</b></span></div>
+    <p id="gText" class="game-text"></p>
+    <label for="gInput" class="sr">Type the text here</label>
+    <input id="gInput" type="text" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="Click here and start typing">
+    <button type="button" id="gReset">New text</button>
+    <p id="gResult" role="status"></p></section>
+  <section id="contact" class="reveal"><h2 data-i18n="hContact">Contact</h2>
+    <p class="mail-line"><span data-i18n="mailLine">Email me directly: </span><a href="mailto:satyanarayantripathi047@gmail.com">satyanarayantripathi047@gmail.com</a></p>
+    <form id="contactForm" novalidate>
+      <label for="cname" data-i18n="lName">Name</label><input id="cname" type="text">
+      <label for="cmail" data-i18n="lMail">E-mail</label><input id="cmail" type="text">
+      <label for="cmsg" data-i18n="lMsg">Message</label><textarea id="cmsg" rows="3"></textarea>
+      <button type="submit" data-i18n="send">Send message</button>
+      <p id="formMsg" role="status"></p>
+    </form></section>
+</main>
+<footer>&copy; 2026 Satyanarayan Tripathi | Roll No. 2501920110334 | <a href="https://github.com/Satya-1718" target="_blank" rel="noopener">GitHub</a> | <a href="mailto:satyanarayantripathi047@gmail.com">Email</a></footer>
+<dialog id="palette" aria-label="Quick search">
+  <div class="pal-box">
+    <label for="palInput" class="sr">Search actions</label>
+    <input id="palInput" type="text" autocomplete="off" spellcheck="false" placeholder="Type to search: projects, dark, resume, hindi&hellip;" role="combobox" aria-expanded="true" aria-controls="palList">
+    <ul id="palList" role="listbox"></ul>
+    <p class="pal-hint">&uarr;&darr; to move &middot; Enter to run &middot; Esc to close</p>
+  </div>
+</dialog>
+<dialog id="lightbox" aria-label="Certificate viewer">
+  <div class="lb-box">
+    <button type="button" class="lb-close" aria-label="Close viewer">&times;</button>
+    <div class="lb-row">
+      <button type="button" class="lb-nav" id="lbPrev" aria-label="Previous certificate">&lsaquo;</button>
+      <img id="lbImg" alt="">
+      <button type="button" class="lb-nav" id="lbNext" aria-label="Next certificate">&rsaquo;</button>
+    </div>
+    <p id="lbCap" aria-live="polite"></p>
+  </div>
+</dialog>
+<script src="portfolio.js"></script>
+</body></html>

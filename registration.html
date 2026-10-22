@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Registration</title><link rel="stylesheet" href="../style.css"><link rel="stylesheet" href="store.css">
+<script src="store.js"></script>
+<script src="../validate_exp6.js"></script>
+<script src="../validate_exp7.js"></script>
+</head>
+<body>
+<h2>Registration Form</h2>
+<form id="regForm" novalidate>
+  <label for="name">Name</label>
+  <input type="text" id="name" onblur="validateName()"><span class="err" id="nameErr"></span>
+  <label for="password">Password</label>
+  <input type="password" id="password" autocomplete="new-password" onblur="validatePassword()"><span class="err" id="pwErr"></span>
+  <label for="password2">Confirm Password</label>
+  <input type="password" id="password2" autocomplete="new-password"><span class="err" id="pw2Err"></span>
+  <label for="email">E-mail ID</label>
+  <input type="text" id="email" onblur="validateEmail()"><span class="err" id="emailErr"></span>
+  <label for="phone">Phone Number</label>
+  <input type="text" id="phone" maxlength="10" onblur="validatePhone()"><span class="err" id="phoneErr"></span>
+  <label>Sex</label>
+  <div class="opts">
+    <label><input type="radio" name="sex" value="Male" checked> Male</label>
+    <label><input type="radio" name="sex" value="Female"> Female</label>
+    <label><input type="radio" name="sex" value="Other"> Other</label>
+  </div>
+  <label>Date of Birth</label>
+  <select class="dob" id="day"></select> <select class="dob" id="month"></select> <select class="dob" id="year"></select>
+  <label>Languages Known</label>
+  <div class="opts">
+    <label><input type="checkbox" name="lang" value="English"> English</label>
+    <label><input type="checkbox" name="lang" value="Telugu"> Telugu</label>
+    <label><input type="checkbox" name="lang" value="Hindi"> Hindi</label>
+    <label><input type="checkbox" name="lang" value="Tamil"> Tamil</label>
+  </div>
+  <label for="address">Address</label>
+  <textarea id="address" rows="3"></textarea>
+  <p class="msg-err" id="formErr" role="alert"></p>
+  <input type="submit" value="Register"> <input type="reset" value="Reset">
+</form>
+<script>
+var d = document.getElementById('day'), m = document.getElementById('month'), y = document.getElementById('year');
+['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'].forEach(function (n, i) { m.add(new Option(n, i + 1)); });
+for (var i = 1; i <= 31; i++) d.add(new Option(i, i));
+for (var j = 2010; j >= 1970; j--) y.add(new Option(j, j));
+
+document.getElementById('regForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var ok = [validateName(), validatePassword(), validateEmail(), validatePhone()].every(Boolean);
+  var pw = document.getElementById('password').value, err2 = document.getElementById('pw2Err');
+  if (document.getElementById('password2').value !== pw) { err2.textContent = 'Passwords do not match.'; ok = false; } else err2.textContent = '';
+  if (!ok) return;
+  var email = document.getElementById('email').value.trim().toLowerCase(), formErr = document.getElementById('formErr');
+  if (getUsers().some(function (u) { return u.email === email; })) { formErr.textContent = 'An account with this e-mail already exists.'; return; }
+  hashPassword(pw, email).then(function (h) {
+    var users = getUsers();
+    users.push({
+      name: document.getElementById('name').value.trim(), email: email, hash: h,
+      phone: document.getElementById('phone').value.trim(),
+      sex: document.querySelector('input[name=sex]:checked').value,
+      dob: d.value + '/' + m.value + '/' + y.value,
+      languages: Array.prototype.map.call(document.querySelectorAll('input[name=lang]:checked'), function (c) { return c.value; }),
+      address: document.getElementById('address').value.trim()
+    });
+    write('store_users', users);
+    toast('Account created! Please log in.');
+    setTimeout(function () { location.href = 'login.html'; }, 1100);
+  });
+});
+</script>
+</body></html>

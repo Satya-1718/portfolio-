@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home</title><link rel="stylesheet" href="../style.css"><link rel="stylesheet" href="store.css">
+<script src="store.js"></script></head>
+<body>
+<h2 id="welcome">Welcome to the GL Bajaj Online Bookstore</h2>
+<p>Browse 10 textbooks across five categories, search by title or author, and keep your picks in the cart.</p>
+<p><a href="catalogue.html">Browse the catalogue &rarr;</a></p>
+<p class="note">Accounts and carts are saved in this browser only (demo project).</p>
+<script>
+var u = currentUser();
+if (u) document.getElementById('welcome').textContent = 'Welcome back, ' + u.name.split(' ')[0] + '!';
+</script>
+</body></html>

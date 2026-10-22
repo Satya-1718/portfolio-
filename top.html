@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<base target="content">
+<style>
+  body { margin: 0; background: #fff8e7; font-family: Georgia, serif; display: flex; align-items: center; gap: 14px; padding: 6px 14px; height: 78px; }
+  img { height: 66px; }
+  .name h1 { margin: 0; font-size: 20px; color: #7a1f1f; }
+  .name p { margin: 2px 0 0; font-size: 13px; color: #555; }
+  nav { margin-left: auto; display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; }
+  nav a { color: #7a1f1f; text-decoration: none; font-size: 14px; font-weight: bold; }
+  nav a:hover { text-decoration: underline; }
+  #hello { font-size: 14px; color: #333; }
+  .badge { background: #7a1f1f; color: #fff; border-radius: 10px; padding: 1px 7px; font-size: 12px; }
+  @media (max-width: 700px) { body { flex-wrap: wrap; height: auto; } nav { margin-left: 0; } .name p { display: none; } }
+</style>
+<script src="store.js"></script>
+</head>
+<body>
+  <img src="../logo.jpg" alt="GL Bajaj logo">
+  <div class="name"><h1>GL Bajaj Online Bookstore</h1><p>GL Bajaj Institute of Technology and Management</p></div>
+  <nav id="nav"></nav>
+<script>
+function updateTop() {
+  var nav = document.getElementById('nav'), user = currentUser(), n = cartCount();
+  nav.textContent = '';
+  function link(text, href, onclick) { var a = el('a', { href: href, text: text }); if (onclick) a.addEventListener('click', onclick); return a; }
+  nav.appendChild(link('Home', 'home.html'));
+  nav.appendChild(link('Catalogue', 'catalogue.html'));
+  var cart = link('Cart ', 'cart.html');
+  cart.appendChild(el('span', { 'class': 'badge', text: String(n) }));
+  nav.appendChild(cart);
+  if (user) {
+    nav.appendChild(el('span', { id: 'hello', text: 'Hello, ' + user.name.split(' ')[0] }));
+    nav.appendChild(link('Logout', 'home.html', function () { logout(); updateTop(); }));
+  } else {
+    nav.appendChild(link('Login', 'login.html'));
+    nav.appendChild(link('Registration', 'registration.html'));
+  }
+}
+updateTop();
+window.addEventListener('storage', updateTop);
+setInterval(updateTop, 1000);
+</script>
+</body>
+</html>

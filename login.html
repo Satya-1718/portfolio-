@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login</title><link rel="stylesheet" href="../style.css"><link rel="stylesheet" href="store.css">
+<script src="store.js"></script></head>
+<body>
+<h2>Login</h2>
+<form id="loginForm">
+  <label for="email">E-mail</label>
+  <input type="text" id="email" autocomplete="username">
+  <label for="pw">Password</label>
+  <input type="password" id="pw" autocomplete="current-password">
+  <p class="msg-err" id="err" role="alert"></p>
+  <input type="submit" value="Login">
+  <p>New user? <a href="registration.html">Register here</a></p>
+</form>
+<script>
+document.getElementById('loginForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var email = document.getElementById('email').value.trim().toLowerCase();
+  var pw = document.getElementById('pw').value, err = document.getElementById('err');
+  var user = getUsers().filter(function (u) { return u.email === email; })[0];
+  if (!user) { err.textContent = 'No account found for that e-mail. Please register first.'; return; }
+  hashPassword(pw, email).then(function (h) {
+    if (h !== user.hash) { err.textContent = 'Wrong password. Please try again.'; return; }
+    write('store_current', { name: user.name, email: user.email });
+    refreshTop(); toast('Welcome back, ' + user.name.split(' ')[0] + '!');
+    setTimeout(function () { location.href = 'home.html'; }, 900);
+  });
+});
+</script>
+</body></html>

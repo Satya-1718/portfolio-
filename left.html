@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<base target="content">
+<style>
+  body { margin: 0; padding: 14px 12px; background: #f3e9d2; font-family: Georgia, serif; }
+  h3 { margin: 0 0 10px; color: #7a1f1f; font-size: 16px; }
+  ul { list-style: none; margin: 0; padding: 0; }
+  li { margin: 0 0 8px; }
+  a { color: #333; text-decoration: none; font-size: 14px; }
+  a:hover { color: #7a1f1f; text-decoration: underline; }
+  .more { margin-top: 18px; border-top: 1px solid #c9b27c; padding-top: 10px; }
+  .more a { color: #7a1f1f; font-size: 13px; }
+  /* the frame is wider than 300px only in the stacked phone layout */
+  @media (min-width: 300px) {
+    body { padding: 8px 10px; overflow-x: auto; white-space: nowrap; }
+    h3, .more { display: none; }
+    ul { display: flex; gap: 16px; }
+    li { margin: 0; }
+  }
+</style>
+</head>
+<body>
+  <h3>Categories</h3>
+  <ul id="cats"></ul>
+  <div class="more">
+    <p><a href="../../portfolio.html" target="_top">&larr; Back to portfolio</a></p>
+    <p><a href="../index.html" target="_top">Original lab version</a></p>
+  </div>
+<script>
+var cats = ['All books', 'Web Development', 'Programming', 'Databases', 'Networking', 'Mathematics'];
+var ul = document.getElementById('cats');
+cats.forEach(function (c, i) {
+  var li = document.createElement('li'), a = document.createElement('a');
+  a.textContent = c;
+  a.href = i === 0 ? 'catalogue.html' : 'catalogue.html?cat=' + encodeURIComponent(c);
+  li.appendChild(a); ul.appendChild(li);
+});
+</script>
+</body>
+</html>

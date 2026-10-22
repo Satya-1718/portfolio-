@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Catalogue</title><link rel="stylesheet" href="../style.css"><link rel="stylesheet" href="store.css">
+<script src="store.js"></script></head>
+<body>
+<h2>Book Catalogue</h2>
+<div class="filters">
+  <input id="q" type="search" placeholder="Search title or author" aria-label="Search books">
+  <select id="cat" aria-label="Category"></select>
+  <span id="count"></span>
+</div>
+<div id="grid" class="books"></div>
+<script>
+var q = document.getElementById('q'), cat = document.getElementById('cat'), grid = document.getElementById('grid');
+cat.appendChild(el('option', { value: '', text: 'All categories' }));
+CATEGORIES.forEach(function (c) { cat.appendChild(el('option', { value: c, text: c })); });
+var wanted = new URLSearchParams(location.search).get('cat');
+if (CATEGORIES.indexOf(wanted) !== -1) cat.value = wanted;
+
+function render() {
+  var term = q.value.trim().toLowerCase();
+  var list = BOOKS.filter(function (b) {
+    return (!cat.value || b.cat === cat.value) &&
+      (b.title + ' ' + b.author).toLowerCase().indexOf(term) !== -1;
+  });
+  grid.textContent = '';
+  list.forEach(function (b) {
+    var btn = el('button', { type: 'button', text: 'Add to cart' });
+    btn.addEventListener('click', function () { addToCart(b.id); });
+    grid.appendChild(el('article', { 'class': 'book' }, [
+      el('img', { src: b.cover, alt: 'Cover of ' + b.title }),
+      el('h3', { text: b.title }),
+      el('p', { text: b.author }),
+      el('p', {}, [el('span', { 'class': 'tag', text: b.cat })]),
+      el('p', { text: b.publisher }),
+      el('p', { 'class': 'price', text: '\u20B9' + b.price }),
+      btn
+    ]));
+  });
+  document.getElementById('count').textContent = list.length + (list.length === 1 ? ' book' : ' books');
+  if (!list.length) grid.appendChild(el('p', { text: 'No books match your search.' }));
+}
+q.addEventListener('input', render);
+cat.addEventListener('change', render);
+render();
+</script>
+</body></html>

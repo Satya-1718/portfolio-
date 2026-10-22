@@ -1,0 +1,12 @@
+/* Experiment 9: background-repeat and link pseudo-classes */
+body { font-family: Georgia, serif; margin: 0; padding: 24px; background: #fffdf5; }
+.box { height: 110px; margin: 10px 0; border: 1px solid #7a1f1f; padding: 8px; background-image: url("tile.png"); font-weight: bold; }
+.r  { background-repeat: repeat; }
+.rx { background-repeat: repeat-x; }
+.ry { background-repeat: repeat-y; }
+.nr { background-repeat: no-repeat; background-position: right center; }
+/* Link states: keep this order (LoVe HAte) */
+a:link    { color: #1f4e79; text-decoration: none; }
+a:visited { color: #6a2c91; }
+a:hover   { color: #fff; background-color: #7a1f1f; text-decoration: underline; }
+a:active  { color: #c9a227; background-color: #333; }

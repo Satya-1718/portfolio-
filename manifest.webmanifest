@@ -1,0 +1,14 @@
+{
+  "name": "Satyanarayan Tripathi | Portfolio",
+  "short_name": "Satya Portfolio",
+  "description": "Portfolio of Satyanarayan Tripathi, B.Tech student and web developer.",
+  "start_url": "portfolio.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fffdf5",
+  "theme_color": "#7a1f1f",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
